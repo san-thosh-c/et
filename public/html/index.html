@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+      integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/main.css" />  
+</head>
+<body>
+    <div class="header">
+        <h3>Trips</h3>
+    </div>
+    <div class="subheader">
+        <div class="left-buttons">
+            <i class="fa-solid fa-arrow-left backCls" id="back" hidden title="Back"></i>
+        </div>
+        <div class="right-buttons">
+            <i class="fa-solid fa-plus" id="addtrip" title="Add New Trip"></i>            
+            <i class="fa-solid fa-user-plus" id="addparticipants" hidden title="Add Participants"></i>
+        </div>
+    </div>
+    <div id="notification" class="notification"></div>
+    <div class="bottom-nav" id="tabNavigation">
+        <a href="#trip" class="tab active">
+            <i class="fa-solid fa-suitcase-rolling"></i>
+            <span>Trips</span>
+        </a>
+        <a href="#activity" class="tab">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Activity</span>
+        </a>
+        <a href="#account" class="tab">
+            <i class="fa-solid fa-user"></i>
+            <span>Account</span>
+        </a>
+    </div>
+
+    <div class="trip-container" id="trip-container"></div>
+
+    <!-- <div class="trip-details" id="tripdetails">
+        <div class="trip_header">
+            <p id="trip_header_name"></p>
+            <i class="fa-solid fa-gear"></i>
+        </div>
+        <div class="trip_pp_details">
+          <div class="trip_pp_left">
+            <p id="trip_adult"></p>
+            <p id="trip_veg"></p>
+          </div>
+          <div class="trip_pp_right">
+            <p id="trip_kids"></p>
+            <p id="trip_nv"></p>
+          </div>
+        </div>
+        <hr>
+
+        <div class="trip_footer">
+          <button id="add_expense" class="add_expense">Add Expense</button>
+        </div>
+
+    </div> -->
+
+    <div id="activity"><p>Activity</p></div>
+
+    <div id="account"><p>Account</p></div>
+
+<!-- Add Trip popup -->
+    <div class="popup-overlay" id="trippopupForm">
+      <div class="popup-box">
+        <h3>Trip Details</h3>
+        <input type="text" placeholder="Name" id="tripname" />
+        <input type="date" placeholder="Date" id="tripdate" />
+        <div class="button-group">
+        <button onclick="submitTripForm()">Create</button>
+        <button class="close-btn" onclick="closeTripForm()">Close</button>
+        </div>
+      </div>
+    </div>
+
+<!--Add participants popup  -->
+    <div class="popup-overlay" id="pp_popupForm">
+      <div class="popup-box">
+        <h3>Add Guest</h3>
+        <div class="input-group">
+            <input type="text" id="guestname" placeholder=" " />
+            <label for="name">Name</label>
+         </div>
+         <div class="input-group">
+            <input type="text" id="flatNumber" placeholder=" "  />
+            <label for="flatNumber">Flat Number</label>
+         </div>
+          <div class="input-group">
+            <input type="number" id="noOfAdults" placeholder=" " value="0" />
+            <label for="noOfAdults">Number of Adults</label>
+          </div>
+          <div class="input-group">
+            <input type="number" placeholder=" " id="noOfKids" value="0"/>
+            <label for="noOfKids">Number of Kids > 5 yrs</label>
+          </div>
+          <div class="input-group">
+            <input type="number" placeholder=" " id="veg" value="0" />
+            <label for="veg">Number of Veg</label>
+          </div>
+          <div class="input-group">
+            <input type="number" placeholder=" " id="nv" value="0" />
+            <label for="nv">Number of Non-Veg</label>
+          </div>
+          <div class="input-group">
+            <input type="text" placeholder=" " id="tripname_PP" readonly/>
+            <label for="tripname_PP">Name of the Trip</label>
+          </div>
+          <div class="button-group">
+            <button onclick="submitForm()">Submit</button>
+            <button class="close-btn" onclick="closeForm()">Close</button>
+        </div>
+        </div>
+      </div>
+
+<script src="../js/index.js"></script>
+</body>
+</html>
