@@ -1,25 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Verdana", sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Verdana", sans-serif;
 }
 
-body{
-    background-color: #F6F7FB;
+body {
+  background-color: #f6f7fb;
 }
 
-button{
-    padding: 10px 20px;
-    background-color: #228b22;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
+button {
+  padding: 10px 20px;
+  background-color: #228b22;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .notification {
@@ -27,6 +27,7 @@ button{
   bottom: 50px;
   width: 100%;
   background-color: #228b22;
+  color: #fff;
   display: flex;
   justify-content: space-around;
   padding: 10px 0;
@@ -42,6 +43,11 @@ button{
   pointer-events: auto;
 }
 
+.notification.error_msg {
+  background-color: #ff0000;
+  color: #fff;
+}
+
 /****** POPUP *********/
 
 .popup-overlay {
@@ -54,6 +60,7 @@ button{
   background: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
+  z-index: 100;
 }
 
 .popup-box {
@@ -97,12 +104,12 @@ button{
 }
 
 .input-group input {
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 0.25rem;
-    font-size: 13px;
-    padding-top: 15px;
-    margin-top: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  font-size: 13px;
+  padding-top: 15px;
+  margin-top: 10px;
 }
 
 .input-group label {
@@ -115,7 +122,6 @@ button{
   font-size: 13px;
   transition: 0.2s ease all;
   pointer-events: none;
-
 }
 
 .input-group input:focus + label,
@@ -127,7 +133,7 @@ button{
 
 /****** End of Popup ********/
 
-.subheader{
+.subheader {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -143,38 +149,38 @@ button{
   align-items: center;
 }
 
-.right-buttons i{
-    font-size: 16px;
-    color: #046104;
+.right-buttons i {
+  font-size: 16px;
+  color: #046104;
 }
 
-.left-buttons .tripname{
-    font-size: 18px;
-    font-weight: 600;
-    color: #a52a2a;
+.left-buttons .tripname {
+  font-size: 18px;
+  font-weight: 600;
+  color: #a52a2a;
 }
 
-.trip-details{
+.trip-details {
   display: flex;
   justify-content: center;
   margin: 0 20px 0 20px;
 }
 
-.trip-details .trip_header{
+.trip-details .trip_header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
 
-.trip-details .trip_header p{
-    color: #a52a2a;
-    font-size: 14px;
-    font-weight: 600;
-    margin: 0 auto; 
+.trip-details .trip_header p {
+  color: #a52a2a;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 auto;
 }
 
-.trip-details .trip_pp_details{
+.trip-details .trip_pp_details {
   font-size: 13px;
   font-weight: 500;
   margin-top: 10px;
@@ -203,149 +209,668 @@ button{
   align-items: flex-end;
 }
 
- .trip_footer{
-  position: fixed;
+.trip_main_details {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.exp_count {
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.trip_footer {
+  position: sticky;
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 10px;
+  background-color: #f6f7fb;
+  padding: 10px 20px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
   display: flex;
   justify-content: center;
-  z-index: 1; 
-
+  gap: 10px;
+  animation: slideUp 0.5s ease-out;
 }
 
- .trip_footer .add_expense{
+.trip_footer .add_expense {
   cursor: pointer;
-
 }
 
-.trip_setting_header{
-    display: flex;
-    height: 80px;
-    margin: 20px;
-    border-radius: 10px;
-    align-content: center;
-    background-color: #d3d3d37a;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    flex-direction: column;
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-.trip_setting_header .trip_setting_tripname{
-    font-size: 26px;
-    display: flex;
-    justify-content: space-evenly;
+.trip_setting_header {
+  display: flex;
+  height: 80px;
+  margin: 20px;
+  border-radius: 10px;
+  align-content: center;
+  background-color: #d3d3d37a;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-.trip_setting_header i{
-    display: flex;
-    justify-content: center;
-    padding: 8px 0;
+.trip_setting_header .trip_setting_tripname {
+  font-size: 26px;
+  display: flex;
+  justify-content: space-evenly;
 }
 
-.trip_settings .groupmembers{
+.trip_setting_header i {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.trip_settings .groupmembers {
+  padding: 0 20px;
+  margin: 20px 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.trip_settings .deletegroup {
+  color: red;
+}
+
+.trip_settings .groupmember_details {
+  padding: 0 20px;
+  margin: 20px 0;
+  display: flex;
+  gap: 30px;
+  align-items: anchor-center;
+}
+
+.trip_settings .groupmember_details .first-letter-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #d3d3d3;
+  color: #333;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.first-letter-badge {
+  /* width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #d3d3d3;
+  color: #333;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  font-size: 26px;
+  align-items: center;
+  background-color: #acbcaf;
+  /* border-radius: 0 10px 10px 0; */
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.6),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  /* border: 1px solid #d7cdcd; */
+  transition: box-shadow 0.3s ease;
+}
+
+.trip_settings .groupmember_details p {
+  cursor: pointer;
+}
+
+.trip_settings .gm_members {
+  padding: 0 20px;
+}
+
+.trip_settings .gm_members .guest-card {
+  height: 40px;
+  font-size: 30px;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 30px;
+  background-color: #d3d3d354;
+  border-radius: 20px;
+  animation: fadeSlideIn 0.4s ease-out forwards;
+}
+
+.trip_settings .gm_members .guest-card:nth-child(odd) {
+  background-color: #b8d8be;
+  /* #f0f8ff; */
+}
+
+.trip_settings .gm_members .guest-card:nth-child(even) {
+  background-color: #d2e7d6;
+  /* #e6ffe687; */
+}
+
+.trip_settings .gm_members .guest-card .first-letter-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  /* background-color: #d3d3d3; */
+  background-color: #acbcaf;
+  color: #333;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.trip_settings .gm_members .guest-card .guest-details .guest-name {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.trip_settings .gm_members .guest-card .guest-details .guest-flat {
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.trip_settings .gm_members .guest-card .guest-change {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  right: 20px;
+  position: relative;
+}
+
+.trip_settings .gm_members .guest-card .guest-change i {
+  font-size: 11px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.trip_settings .gm_members .guest-card .guest-details {
+  flex-grow: 1;
+}
+
+/*******Add Expense*********/
+.addexpense .addexp_tripname {
+  padding: 0 20px;
+  margin: 20px 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.addexpense .addexp_details {
+  padding: 0 20px;
+  margin: 20px 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.addexpense .addexp_details .addexp_desc,
+.addexpense .addexp_details .addexp_amt,
+.addexpense .addexp_details .addexp_paidby,
+.addexpense .addexp_details .addexp_date {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid #d3d3d352;
+  padding: 10px;
+  border-radius: 10px;
+  background: #e1e1e147;
+  /* background: #FDFAF6; */
+  margin-bottom: 20px;
+  height: 100px;
+}
+
+.addexpense .addexp_details .addexp_desc .label-row p,
+.addexpense .addexp_details .addexp_amt .label-row p,
+.addexpense .addexp_details .addexp_paidby .label-row p,
+.addexpense .addexp_details .addexp_date .label-row p {
+  margin: 0;
+  font-size: 12px;
+}
+
+.addexpense .addexp_details .addexp_desc .input-row,
+.addexpense .addexp_details .addexp_paidby .input-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.addexpense .addexp_details .addexp_amt .input-row,
+.addexpense .addexp_details .addexp_date .input-row {
+  width: 100%;
+}
+
+.addexpense .addexp_details .addexp_amt .rupee-wrapper,
+.addexpense .addexp_details .addexp_date .rupee-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  padding: 0 10px;
+  height: 40px;
+  background-color: #f6f7fb;
+}
+
+.addexpense .addexp_details .addexp_amt .rupee-symbol,
+.addexpense .addexp_details .addexp_date .rupee-symbol {
+  font-size: 16px;
+  color: #333;
+}
+
+.addexpense .addexp_details .addexp_amt .rupee-wrapper span {
+  font-size: 20px;
+  height: 100%;
+  width: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.addexpense .addexp_details .addexp_date .rupee-wrapper i {
+  font-size: 20px;
+  height: 100%;
+  width: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.addexpense .addexp_details .addexp_amt .rupee-wrapper input,
+.addexpense .addexp_details .addexp_date .rupee-wrapper input {
+  border: none;
+  outline: none;
+  width: 100%;
+  background-color: #f6f7fb;
+}
+
+.addexpense .addexp_details .addexp_desc .input-row .icondisplay,
+.addexpense .addexp_details .addexp_paidby .input-row .icondisplay {
+  height: 40px;
+  width: 40px;
+  border: 1px solid;
+  border-radius: 6px;
+}
+
+.addexpense .addexp_details .addexp_desc .input-row select,
+.addexpense .addexp_details .addexp_paidby .input-row select {
+  flex-grow: 1;
+  height: 40px;
+  border-radius: 6px;
+  background-color: #f6f7fb;
+  font-size: 13px;
+}
+
+.addexp_btn {
+  padding: 0 20px;
+  margin: 20px 0;
+}
+
+/*******Edit Expense **********/
+/* .editexpense .addexp_tripname{
     padding: 0 20px;
     margin: 20px 0;
     font-size: 18px;
     font-weight: 500;
+} */
 
+.editexpense .editexp_details {
+  padding: 0 20px;
+  margin: 20px 0;
+  font-size: 18px;
+  font-weight: 500;
 }
 
-.trip_settings .deletegroup{
-    color: red;
+.editexpense .editexp_details .editexp_desc,
+.editexpense .editexp_details .editexp_amt,
+.editexpense .editexp_details .editexp_paidby,
+.editexpense .editexp_details .editexp_date {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid #d3d3d352;
+  padding: 10px;
+  border-radius: 10px;
+  background: #e1e1e147;
+  margin-bottom: 20px;
+  height: 100px;
 }
 
-.trip_settings .groupmember_details{
-    padding: 0 20px;
-    margin: 20px 0;
-    display: flex;
-    gap: 30px;
-    align-items: anchor-center;
+.editexpense .editexp_details .editexp_desc .label-row p,
+.editexpense .editexp_details .editexp_amt .label-row p,
+.editexpense .editexp_details .editexp_paidby .label-row p,
+.editexpense .editexp_details .editexp_date .label-row p {
+  margin: 0;
+  font-size: 12px;
 }
 
-.trip_settings .groupmember_details .first-letter-badge {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;   
-    background-color: #d3d3d3;
-    color: #333;              
-    font-size: 20px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-transform: uppercase;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.editexpense .editexp_details .editexp_desc .input-row,
+.editexpense .editexp_details .editexp_paidby .input-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 
-.trip_settings .groupmember_details p{
-    cursor: pointer;
+.editexpense .editexp_details .editexp_amt .input-row,
+.editexpense .editexp_details .edit_exp_date .input-row {
+  width: 100%;
 }
 
-.trip_settings .gm_members{
-    padding: 0 20px;
+.editexpense .editexp_details .editexp_amt .rupee-wrapper,
+.editexpense .editexp_details .edit_exp_date .rupee-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  padding: 0 10px;
+  height: 40px;
+  background-color: #f6f7fb;
 }
 
-.trip_settings .gm_members .guest-card{
-    height: 40px;
-    font-size: 30px;
-    margin-bottom: 10px;
-    display: flex;
-    gap: 30px;
-    background-color: #d3d3d354;
-    border-radius: 20px;
+.editexpense .editexp_details .editexp_amt .rupee-symbol,
+.editexpense .editexp_details .edit_exp_date .rupee-symbol {
+  font-size: 16px;
+  color: #333;
 }
 
-.trip_settings .gm_members .guest-card  .first-letter-badge{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;          
-    background-color: #d3d3d3;  
-    color: #333;            
-    font-size: 20px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-transform: uppercase;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1); 
-
+.editexpense .editexp_details .editexp_amt .rupee-wrapper span {
+  font-size: 20px;
+  height: 100%;
+  width: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
 }
 
-.trip_settings .gm_members .guest-card .guest-details .guest-name{
-    font-size: 13px;
-    font-weight: 600;
-    margin-top: 2px;
+.editexpense .editexp_details .editexp_date .rupee-wrapper i {
+  font-size: 20px;
+  height: 100%;
+  width: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
 }
 
-.trip_settings .gm_members .guest-card .guest-details .guest-flat{
-    font-size: 11px;
-    margin-top: 5px;
+.editexpense .editexp_details .editexp_amt .rupee-wrapper input,
+.editexpense .editexp_details .editexp_date .rupee-wrapper input {
+  border: none;
+  outline: none;
+  width: 100%;
+  background-color: #f6f7fb;
 }
 
-.trip_settings .gm_members .guest-card .guest-change{
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    right: 20px;
-    position: relative;
+.editexpense .editexp_details .editexp_desc .input-row .icondisplay,
+.editexpense .editexp_details .editexp_paidby .input-row .icondisplay {
+  height: 40px;
+  width: 40px;
+  border: 1px solid;
+  border-radius: 6px;
 }
 
-.trip_settings .gm_members .guest-card .guest-change i{
-    font-size: 11px;
-    margin-top: 5px;
-    cursor: pointer;
+.editexpense .editexp_details .editexp_desc .input-row select,
+.editexpense .editexp_details .editexp_paidby .input-row select {
+  flex-grow: 1;
+  height: 40px;
+  border-radius: 6px;
+  background-color: #f6f7fb;
+  font-size: 13px;
 }
 
-
-.trip_settings .gm_members .guest-card .guest-details {
-    flex-grow: 1; /* allows this section to take up remaining space */
+.editexp_btn {
+  padding: 0 20px;
+  margin: 20px 0;
 }
 
+/****Expense List *****/
+
+.expense_list {
+  padding: 0 20px;
+  margin: 20px 0;
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(100vh - 150px);
+  animation: fadeSlideIn 0.5s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.expense_list .exp-card {
+  height: 60px;
+  font-size: 13px;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 20px;
+  background-color: #d3d3d354;
+  border-radius: 10px;
+  align-items: center;
+  opacity: 0;
+  animation: fadeSlideIn 0.4s ease-out forwards;
+}
+
+.expense_list .exp-card:nth-child(odd) {
+  background-color: #b8d8be;
+  /* #f0f8ff; */
+}
+
+.expense_list .exp-card:nth-child(even) {
+  background-color: #d2e7d6;
+  /* #e6ffe687; */
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.expense_list .exp-card .categorybadge {
+  height: 60px;
+  width: 60px;
+  border: 1px solid;
+  border-radius: 10px;
+}
+
+.expense_list .exp-card .exp-amount {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  right: 20px;
+  position: relative;
+}
+
+.expense_list .exp-card .exp-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.expense_list .exp-card .exp-details .exp-category {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.expense_list .exp-card .exp-details .exp-name {
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.expense_list .exp-card .exp-details .exp-date {
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.expense_list .exp-card .exp-amount {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  font-weight: 800;
+}
+
+.expense_list .exp-card .exp-change {
+  display: flex;
+  gap: 10px;
+}
+
+.expense_list .exp-card .exp-change i {
+  margin-right: 10px;
+}
+
+.expense_calculation {
+  padding: 0 20px;
+  margin: 20px 0;
+}
+
+.expense_calculation .button-groups {
+  display: flex;
+  /* gap: 10px; */
+  justify-content: center;
+}
+
+.button-groups .btn {
+  padding: 10px 20px;
+  background-color: gray;
+  cursor: pointer;
+}
+
+.button-groups .btn1 {
+  cursor: pointer;
+  border-radius: 10px 0 0 10px;
+  border-right: 1px solid white;
+}
+
+.expense_calculation .button-groups .show {
+  background-color: green;
+}
+
+.button-groups .btn2 {
+  cursor: pointer;
+  border-radius: 0 10px 10px 0;
+  border-left: 1px solid white;
+}
+
+.button-groups .btn:hover {
+  background-color: green;
+}
+
+.totalexpenses {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.totalexpenses .total {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.totalexpenses .fullamt {
+  font-size: 20px;
+  color: green;
+  font-weight: 600;
+}
+
+.category_list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 20px 0;
+  padding: 0 20px;
+  align-items: center;
+  animation: fadeSlideIn 0.5s ease-out;
+}
+
+.category_list .cat-card {
+  display: flex;
+  width: 100%;
+  text-align: center;
+  height: 100px;
+  align-content: center;
+  border-radius: 10px;
+  margin: 20px 0;
+  background: linear-gradient(51deg, #d2e7d6, #b8d8be);
+}
+
+.category_list .cat-card .categorybadge {
+  /* color: blue; */
+  height: 100px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  align-items: center;
+  background-color: #acbcaf;
+  /* border-radius: 0 10px 10px 0; */
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.6),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  /* border: 1px solid #d7cdcd; */
+  transition: box-shadow 0.3s ease;
+}
+
+.category_list .cat-card .categorydetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+}
+
+.category_list .cat-card .categorydetails .cat-category {
+  margin: 16px 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.category_list .cat-card .categorydetails .cat-amt {
+  font-size: 16px;
+  font-weight: 600;
+  color: #640c0c;
+}
 
 @media (max-width: 900px) {
-.subheader {
+  .subheader {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -370,9 +895,9 @@ button{
   }
 
   .trip_pp_details {
-  display: flex;
-  width: 100%;
-  padding: 0 20px;
-  margin: 20px 0;
-}
+    display: flex;
+    width: 100%;
+    padding: 0 20px;
+    margin: 20px 0;
+  }
 }
