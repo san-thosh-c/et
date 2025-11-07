@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <div class="subheader">
+    <div class="subheader" id="subheader">
         <div class="left-buttons">
             <i class="fa-solid fa-arrow-left " id="triphome_back" hidden title="Back"></i>
             <p id="tripname" class="tripname"></p>
@@ -23,24 +23,46 @@
             <i class="fa-solid fa-gear" id="trip_settings_icon" title="Settings"></i>
         </div>
     </div>  
+<!-- Trip landing page -->    
     <div class="trip_main_details" id="trip_main_details">
         <hr>  
-            <div class="trip_pp_details">
-            <div class="trip_pp_left">
-                <p id="trip_adult"></p>
-                <p id="trip_veg"></p>
+            <!-- <div class="trip_pp_details">
+              <div class="trip_pp_left">
+                  <p id="trip_adult"></p>
+                  <p id="trip_veg"></p>
+              </div>
+              <div class="trip_pp_right">
+                  <p id="trip_kids"></p>
+                  <p id="trip_nv"></p>
+              </div>
+            </div> -->
+        <!-- <hr>  -->
+            <div class="expense_calculation" id="expense_calculation">              
+              <div class="button-groups">
+                <button class="btn btn1 " onclick="toggleview('categorydetails')" id="viewcategories">View Categories</button>
+                <button class="btn btn2 show" onclick="toggleview('expensedetails')" id="allexpenses">Full Expense List</button>
+              </div>
+              <!-- <br>
+              <hr> -->
+              <div class="totalexpenses" id="totalexpenses">
+                <p class="total">Total</p>
+                <p id="fullamt" class="fullamt">Calculating...</p>
+              </div>
+
+              <!-- <hr> -->
             </div>
-            <div class="trip_pp_right">
-                <p id="trip_kids"></p>
-                <p id="trip_nv"></p>
+            <p class="exp_count" id="exp_count"></p>
+            <div class="expense_list" id="expense_list">
+              
             </div>
-            </div>
-        <hr> 
+            <div class="category_list" id="category_list" hidden></div>
 
             <div class="trip_footer">
                 <button id="add_expense" class="add_expense">Add Expense</button>
+                <button id="exp_summary" class="summary_expense">Summary</button>
             </div>
     </div>
+<!-- Settings -->
     <div class="trip_settings" id="trip_settings" hidden>
         <hr>
         <div class="trip_setting_header" id="trip_setting_header">
@@ -63,6 +85,164 @@
             <h6>Delete Group</h5>
         </div>
     </div>
+<!-- Add expense page -->    
+    <div class="addexpense" id="addexpense" hidden>
+      <div class="subheader" id="subheader_add_expense">
+          <div class="left-buttons">
+              <i class="fa-solid fa-arrow-left " id="add_exp_back" hidden title="Back"></i>
+              <p id="tripname" class="tripname">Add Expense</p>
+          </div>
+      </div>
+      <hr>
+      <div class="addexp_tripname" id="addexp_tripname">
+        <p id="addexp_tripname_p"></p>
+      </div>
+      <hr>
+      <div class="addexp_details" id="addexp_details">
+        <div class="addexp_desc">          
+            <div class="label-row">
+              <p>Towards</p>
+            </div>
+            <div class="input-row">
+                <div class="icondisplay" id="icon_display"></div>
+                <select name="category" placeholder="Category" id="category">
+                  <option value="" disabled selected>Please select a category</option>
+                  <option value="Transport">Transport</option>
+                  <option value="Local_Transport">Local Transport/Safari/Jeep</option>
+                  <option value="Accomodation">Accomodation</option>
+                  <option value="Ticket">Entry Tickets</option>
+                  <option value="Food">Food</option>
+                  <option value="Snacks">Snacks</option>
+                  <option value="Fuel">Fuel</option>
+                  <option value="Advance_Payment">Advance Payment</option>
+                  <option value="Others">Others/Common Expenses</option>
+                </select>    
+              </div>      
+        </div>
+        <div class="addexp_amt">
+          <div class="label-row">
+              <p>Enter the Amount</p>
+            </div>
+            <div class="input-row">              
+                <div class="rupee-wrapper">
+                  <span class="rupee-symbol">₹</span>
+                  <input type="number" placeholder="Amount" id="exp_amt" />
+                </div>
+            </div>
+        </div>
+        <div class="addexp_paidby">
+            <div class="label-row">
+              <p>Paid By</p>
+            </div>
+            <div class="input-row">
+                <div class="icondisplay" id="icon_display_1"></div>
+                <select name="guestlist" placeholder="Guest" id="exp_guest"></select>    
+            </div>  
+        </div>
+        <div class="addexp_date">
+           <div class="label-row">
+              <p>Paid on</p>
+            </div>
+            <div class="input-row">
+                <div class="rupee-wrapper">
+                  <i class="fa-solid fa-calendar"></i>
+                  <input type="date" placeholder="Date" id="exp_date" />
+                </div>
+            </div>
+        </div>
+      </div>
+      <hr>
+      <div class="addexp_btn" id="addexp_btn">
+        <div class="button-group">
+            <button onclick="save_new_exp()">Save & Create New</button>
+            <button onclick="save_exp()">Save</button>
+            <button onclick="cancel_exp()">Cancel</button>
+        </div>
+      </div>     
+    </div>
+
+<!-- Edit Expense page  -->
+     <div class="editexpense" id="editexpense" hidden>
+      <div class="subheader" id="subheader_edit_expense">
+          <div class="left-buttons">
+              <i class="fa-solid fa-arrow-left " id="edit_exp_back" hidden title="Back"></i>
+              <p id="tripname" class="tripname">Edit Expense</p>
+          </div>
+      </div>
+      <hr>
+      <!-- <div class="editexp_tripname" id="editexp_tripname">
+        <p id="editexp_tripname_p"></p>
+      </div>
+      <hr> -->
+      <div class="editexp_details" id="editexp_details">
+        <div class="editexp_desc">          
+            <div class="label-row">
+              <p>Towards</p>
+            </div>
+            <div class="input-row">
+                <div class="icondisplay" id="edit_icon_display"></div>
+                <select name="category" placeholder="Category" id="edit_category">
+                  <option value="" disabled selected>Please select a category</option>
+                  <option value="Transport">Transport</option>
+                  <option value="Local_Transport">Local Transport/Safari/Jeep</option>
+                  <option value="Accomodation">Accomodation</option>
+                  <option value="Ticket">Entry Tickets</option>
+                  <option value="Food">Food</option>
+                  <option value="Snacks">Snacks</option>
+                  <option value="Fuel">Fuel</option>
+                  <option value="Advance_Payment">Advance Payment</option>
+                  <option value="Others">Others/Common Expenses</option>
+                </select>    
+              </div>      
+        </div>
+        <div class="editexp_amt">
+          <div class="label-row">
+              <p>Enter the Amount</p>
+            </div>
+            <div class="input-row">              
+                <div class="rupee-wrapper">
+                  <span class="rupee-symbol">₹</span>
+                  <input type="number" placeholder="Amount" id="edit_exp_amt" />
+                </div>
+            </div>
+        </div>
+        <div class="editexp_paidby">
+            <div class="label-row">
+              <p>Paid By</p>
+            </div>
+            <div class="input-row">
+                <div class="icondisplay" id="edit_icon_display_1"></div>
+                <select name="guestlist" placeholder="Guest" id="edit_exp_guest"></select>    
+            </div>  
+        </div>
+        <div class="editexp_date">
+           <div class="label-row">
+              <p>Paid on</p>
+            </div>
+            <div class="input-row">
+                <div class="rupee-wrapper">
+                  <i class="fa-solid fa-calendar"></i>
+                  <input type="date" placeholder="Date" id="edit_exp_date" />
+                </div>
+            </div>
+            <!-- <div class="input-row">
+                <div class="rupee-wrapper">
+                  <i class="fa-solid fa-calendar"></i>
+                  <input type="date" placeholder="Date" id="edit_exp_date" />
+                </div>
+            </div> -->
+        </div>
+      </div>
+      <hr>
+      <div class="editexp_btn" id="editexp_btn">
+        <div class="button-group">
+            <button onclick="save_edit_exp()">Update</button>
+            <button onclick="cancel_edit_exp()">Cancel</button>
+        </div>
+      </div>     
+    </div>
+
+<!-- Popups -->    
     <div id="popup_delete_group" class="popup-overlay">
         <div class="popup-box">
             <p>Are you sure you want to delete this trip?</p>
@@ -111,7 +291,64 @@
         </div>
 
     </div>
+    <div id="popup_delete_guest" class="popup-overlay">
+        <div class="popup-box">
+            <p>Do you really want to delete this guest?</p>
+            <div class="button-group">
+                <button onclick="confirmguestDelete()">Yes</button>
+                <button onclick="hidedeletePopup()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <div class="popup-overlay" id="pp_edit_popupForm">
+      <div class="popup-box">
+        <h3>Edit Guest</h3>
+        <div class="input-group">
+            <input type="text" id="edit_guestname" placeholder=" " />
+            <label for="name">Name</label>
+         </div>
+         <div class="input-group">
+            <input type="text" id="edit_flatNumber" placeholder=" "  />
+            <label for="flatNumber">Flat Number</label>
+         </div>
+          <div class="input-group">
+            <input type="number" id="edit_noOfAdults" placeholder=" " value="0" />
+            <label for="noOfAdults">Number of Adults</label>
+          </div>
+          <div class="input-group">
+            <input type="number" placeholder=" " id="edit_noOfKids" value="0"/>
+            <label for="noOfKids">Number of Kids > 5 yrs</label>
+          </div>
+          <div class="input-group">
+            <input type="number" placeholder=" " id="edit_veg" value="0" />
+            <label for="veg">Number of Veg</label>
+          </div>
+          <div class="input-group">
+            <input type="number" placeholder=" " id="edit_nv" value="0" />
+            <label for="nv">Number of Non-Veg</label>
+          </div>
+          <div class="input-group">
+            <input type="text" placeholder=" " id="edit_tripname_PP" readonly/>
+            <label for="tripname_PP">Name of the Trip</label>
+          </div>
+          <div class="button-group">
+            <button onclick="submitEditForm()">Update</button>
+            <button class="close-btn" onclick="closeEditForm_pp()">Close</button>
+        </div>
+        </div>
+
+    </div> 
+    <div id="popup_delete_exp" class="popup-overlay">
+        <div class="popup-box">
+            <p>Do you really want to delete this expense?</p>
+            <div class="button-group">
+                <button onclick="confirmExpDelete()">Yes</button>
+                <button onclick="hideExpdeletePopup()">Cancel</button>
+            </div>
+        </div>
+    </div>   
     <div id="notification" class="notification"></div>
     <script src="../js/tripdetails.js"></script>
+
 </body>
 </html>
