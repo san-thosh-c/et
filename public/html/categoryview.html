@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+    <link rel="icon" href="data:," />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+      integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../css/tripdetails.css" />
+  </head>
+  <body>
+    <div class="subheader" id="subheader">
+      <div class="left-buttons">
+        <i
+          class="fa-solid fa-arrow-left"
+          id="categoryhome_back"
+          hidden
+          title="Back"
+        ></i>
+        <p id="tripname" class="tripname"></p>
+      </div>
+      <!-- <div class="right-buttons">
+        <i
+          class="fa-solid fa-gear"
+          id="trip_settings_icon"
+          title="Settings"
+        ></i>
+      </div> -->
+    </div>
+    <hr />
+    <div class="categoryView_details">
+      <div class="details">
+        <div class="exp_title">
+          <p>Total Expenses</p>
+          <p
+            id="totalexpenses"
+            class="expense_number"
+            style="visibility: hidden"
+          ></p>
+        </div>
+        <div class="exp_title">
+          <p id="cat_title">Category Expenses</p>
+          <p
+            id="categoryexpenses"
+            class="expense_number"
+            style="visibility: hidden"
+          ></p>
+        </div>
+      </div>
+      <div class="showmore">
+        <button onclick="showAll()">Show All Categories</button>
+      </div>
+
+      <div class="categoryview_list" id="categoryview_list" hidden></div>
+    </div>
+
+    <script src="../js/categoryview.js"></script>
+  </body>
+</html>

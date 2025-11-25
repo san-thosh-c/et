@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <link rel="icon" href="data:," />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+      integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../css/summary.css" />
+  </head>
+  <body>
+    <div class="subheader" id="subheader">
+      <div class="left-buttons">
+        <i
+          class="fa-solid fa-arrow-left"
+          id="summary_back"
+          hidden
+          title="Back"
+        ></i>
+        <p id="tripname" class="tripname"></p>
+      </div>
+      <div class="right-buttons">
+        <!-- <button id="exportBtn">Export to Excel</button> -->
+        <a href="#" id="exportBtn">Export</a>
+      </div>
+    </div>
+    <hr />
+    <div class="summarydetails">
+      <div class="pp_details">
+        <div class="card adults">
+          <div class="card-content">
+            <div class="c_top">
+              <i class="fa-solid fa-user"></i>
+              <p class="count" id="a_count"></p>
+            </div>
+            <div class="c_bottom">
+              <i class="fa-solid fa-children"></i>
+              <p class="count" id="k_count"></p>
+            </div>
+          </div>
+        </div>
+        <div class="card veg">
+          <div class="card-icon"></div>
+          <div class="card-content">
+            <div class="c_top">
+              <i class="fa-solid fa-carrot"></i>
+              <p class="count" id="v_count"></p>
+            </div>
+            <div class="c_bottom">
+              <i class="fa-solid fa-fish-fins"></i>
+              <p class="count" id="n_count"></p>
+            </div>
+          </div>
+        </div>
+        <div class="card total">
+          <div class="card-icon"></div>
+          <div class="card-content">
+            <i class="fa-solid fa-users"></i>
+            <p class="count" id="t_count">34</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-container" id="card-container"></div>
+    <script src="../js/summary.js"></script>
+  </body>
+</html>
