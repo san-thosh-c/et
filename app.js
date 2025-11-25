@@ -39,6 +39,7 @@ const userSchema = new mongoose.Schema({
   veg: { type: Number, required: true },
   nonVeg: { type: Number, required: true },
   trip_id: { type: String, required: true },
+  financier: { type: Boolean, required: false },
 });
 
 const expenseSchema = new mongoose.Schema({
@@ -49,6 +50,10 @@ const expenseSchema = new mongoose.Schema({
   category: { type: String, required: true },
   amount: { type: Number, required: true },
   date: { type: String, required: false },
+  split_food: { type: String, required: false },
+  veg: { type: Number, required: false },
+  nveg: { type: Number, required: false },
+  split_share: { type: String, required: false },
 });
 
 const trip = mongoose.model("Trip", tripSchema);
@@ -107,9 +112,20 @@ app.get("/api/trips", async (req, res) => {
 //Expense
 app.post("/addexpense", async (req, res) => {
   try {
-    const { guest_Id, guestname, flatNumber, trip_id, category, amount, date } =
-      req.body;
-    console.log("req", req);
+    const {
+      guest_Id,
+      guestname,
+      flatNumber,
+      trip_id,
+      category,
+      amount,
+      date,
+      split_food,
+      veg,
+      nveg,
+      split_share,
+    } = req.body;
+    console.log("req==========>", req);
     const numamount = Number(amount);
     const newExp = new exp({
       guest_Id,
@@ -119,6 +135,10 @@ app.post("/addexpense", async (req, res) => {
       category,
       amount: numamount,
       date,
+      split_food,
+      veg,
+      nveg,
+      split_share,
     });
     await newExp.save();
     return res.status(201).json({
@@ -147,9 +167,21 @@ app.get("/api/getexpenses/:id", async (req, res) => {
 
 app.patch("/api/updateexpense/:id", async (req, res) => {
   try {
+    console.log("request = ", req.body);
     const id = req.params.id;
-    const { guest_Id, guestname, flatNumber, trip_id, category, amount, date } =
-      req.body;
+    const {
+      guest_Id,
+      guestname,
+      flatNumber,
+      trip_id,
+      category,
+      amount,
+      date,
+      split_food,
+      veg,
+      nveg,
+      split_share,
+    } = req.body;
 
     const updateData = {
       guest_Id,
@@ -159,8 +191,13 @@ app.patch("/api/updateexpense/:id", async (req, res) => {
       category,
       amount,
       date,
+      split_food,
+      veg,
+      nveg,
+      split_share,
     };
 
+    console.log("updateData = ", updateData);
     const updatedExp = await exp.findByIdAndUpdate(id, updateData, {
       new: true,
       runValidators: true,
@@ -169,6 +206,8 @@ app.patch("/api/updateexpense/:id", async (req, res) => {
     if (!updatedExp) {
       return res.status(404).json({ error: "Expense not found" });
     }
+
+    console.log("updatedExp = ", updatedExp);
 
     res.status(200).json({ message: "Expense updated", success: true });
   } catch (err) {
@@ -201,6 +240,7 @@ app.post("/addguest", async (req, res) => {
       noofVeg,
       noofNonVeg,
       trip_id,
+      financier,
     } = req.body;
     const numAdults = parseInt(adults) || 0;
     const numKids = parseInt(kids) || 0;
@@ -226,7 +266,9 @@ app.post("/addguest", async (req, res) => {
       veg: numVeg,
       nonVeg: numNonVeg,
       trip_id,
+      financier: req.body.financier,
     });
+    console.log("newUser = ", newUser);
     await newUser.save();
     return res.status(201).json({
       success: true,
@@ -280,6 +322,7 @@ app.delete("/api/guests/:id", async (req, res) => {
 
 app.patch("/api/updateguests/:id", async (req, res) => {
   try {
+    console.log("Guest request update = ", req.body);
     const id = req.params.id;
     const {
       guestname,
@@ -289,6 +332,7 @@ app.patch("/api/updateguests/:id", async (req, res) => {
       noofVeg,
       noofNonVeg,
       trip_id,
+      financier,
     } = req.body;
 
     const updateData = {
@@ -296,11 +340,12 @@ app.patch("/api/updateguests/:id", async (req, res) => {
       flatNumber,
       adults: parseInt(adults) || 0,
       kids: parseInt(kids) || 0,
-      noofVeg: parseInt(noofVeg) || 0,
-      noofNonVeg: parseInt(noofNonVeg) || 0,
+      veg: parseInt(noofVeg) || 0,
+      nonVeg: parseInt(noofNonVeg) || 0,
       trip_id,
+      financier: req.body.financier,
     };
-
+    console.log("updateData = ", updateData);
     const updatedGuest = await user.findByIdAndUpdate(id, updateData, {
       new: true,
       runValidators: true,
