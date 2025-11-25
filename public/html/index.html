@@ -1,126 +1,388 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Share</title>
-    <link rel="icon" href="data:,">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
-      integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../css/main.css" />  
-</head>
-<body>
-    <div class="header">
-        <h3>Trips</h3>
-    </div>
-    <div class="subheader">
-        <div class="left-buttons">
-            <i class="fa-solid fa-arrow-left backCls" id="back" hidden title="Back"></i>
-        </div>
-        <div class="right-buttons">
-            <i class="fa-solid fa-plus" id="addtrip" title="Add New Trip"></i>            
-            <i class="fa-solid fa-user-plus" id="addparticipants" hidden title="Add Participants"></i>
-        </div>
-    </div>
-    <div id="notification" class="notification"></div>
-    <div class="bottom-nav" id="tabNavigation">
-        <a href="#trip" class="tab active">
-            <i class="fa-solid fa-suitcase-rolling"></i>
-            <span>Trips</span>
-        </a>
-        <a href="#activity" class="tab">
-            <i class="fa-solid fa-chart-line"></i>
-            <span>Activity</span>
-        </a>
-        <a href="#account" class="tab">
-            <i class="fa-solid fa-user"></i>
-            <span>Account</span>
-        </a>
-    </div>
+document.addEventListener("DOMContentLoaded", async () => {
+  let selectedTripId,
+    selectedTripName = null;
+  let selectedTheme;
+  // localStorage.clear();
+  localStorage.removeItem("selectedTripId");
+  localStorage.removeItem("selectedTripName");
+  selectedTheme = localStorage.getItem("selectedTheme");
+  console.log("selectedTheme=", selectedTheme);
+  if (
+    selectedTheme !== null &&
+    selectedTheme !== undefined &&
+    selectedTheme !== ""
+  ) {
+    document.body.className = "";
+    document.body.classList.add(selectedTheme);
+  }
 
-    <div class="trip-container" id="trip-container"></div>
+  const addBtn = document.getElementById("addparticipants");
+  const addtripBtn = document.getElementById("addtrip");
+  const backBtn = document.getElementById("back");
+  const tripContainer = document.getElementById("trip-container");
+  // const tripDetails = document.getElementById('tripdetails');
+  const activity = document.getElementById("activity");
+  const account = document.getElementById("account");
+  const popupTrip = document.getElementById("trippopupForm");
+  // const pp_popup = document.getElementById("pp_popupForm");
+  const tavNav = document.getElementById("tabNavigation");
 
-    <!-- <div class="trip-details" id="tripdetails">
-        <div class="trip_header">
-            <p id="trip_header_name"></p>
-            <i class="fa-solid fa-gear"></i>
-        </div>
-        <div class="trip_pp_details">
-          <div class="trip_pp_left">
-            <p id="trip_adult"></p>
-            <p id="trip_veg"></p>
-          </div>
-          <div class="trip_pp_right">
-            <p id="trip_kids"></p>
-            <p id="trip_nv"></p>
-          </div>
-        </div>
-        <hr>
+  const themeclick = document.getElementById("mapIcon");
+  const themesDiv = document.querySelector(".themes");
+  const darkmode = document.getElementById("dark");
+  const lightmode = document.getElementById("light");
+  const lavendermode = document.getElementById("lavender");
+  const beigemode = document.getElementById("beige");
+  const greenmode = document.getElementById("green");
+  const orangemode = document.getElementById("orange");
+  const greymode = document.getElementById("grey");
+  const brownmode = document.getElementById("brown");
 
-        <div class="trip_footer">
-          <button id="add_expense" class="add_expense">Add Expense</button>
-        </div>
+  activity.style.display = "none";
+  account.style.display = "none";
+  backBtn.style.display = "none";
+  addBtn.style.display = "none";
+  // tripDetails.style.display='none';
 
-    </div> -->
+  darkmode.addEventListener("click", () => {
+    document.body.className = "";
+    document.body.classList.add("dark-theme");
+    localStorage.setItem("selectedTheme", document.body.classList.value);
+    darkmode.classList.add("toggleclass");
+    lightmode.classList.remove("toggleclass");
+    beigemode.classList.remove("selectedthemehighlight");
+    lavendermode.classList.remove("selectedthemehighlight");
+    greenmode.classList.remove("selectedthemehighlight");
+    orangemode.classList.remove("selectedthemehighlight");
+    greymode.classList.remove("selectedthemehighlight");
+    brownmode.classList.remove("selectedthemehighlight");
+  });
 
-    <div id="activity"><p>Activity</p></div>
+  lightmode.addEventListener("click", () => {
+    document.body.className = "";
+    document.body.classList.add("light-theme");
+    darkmode.classList.remove("toggleclass");
+    lightmode.classList.add("toggleclass");
 
-    <div id="account"><p>Account</p></div>
+    localStorage.setItem("selectedTheme", document.body.classList.value);
+    console.log("selectedTheme=>", document.body.classList.value);
+    beigemode.classList.remove("selectedthemehighlight");
+    lavendermode.classList.remove("selectedthemehighlight");
+    greenmode.classList.remove("selectedthemehighlight");
+    orangemode.classList.remove("selectedthemehighlight");
+    greymode.classList.remove("selectedthemehighlight");
+    brownmode.classList.remove("selectedthemehighlight");
+  });
 
-<!-- Add Trip popup -->
-    <div class="popup-overlay" id="trippopupForm">
-      <div class="popup-box">
-        <h3>Trip Details</h3>
-        <input type="text" placeholder="Name" id="tripname" />
-        <input type="date" placeholder="Date" id="tripdate" />
-        <div class="button-group">
-        <button onclick="submitTripForm()">Create</button>
-        <button class="close-btn" onclick="closeTripForm()">Close</button>
-        </div>
-      </div>
-    </div>
+  lavendermode.addEventListener("click", () => {
+    document.body.className = "";
+    document.body.classList.add("lavender-theme");
+    localStorage.setItem("selectedTheme", document.body.classList.value);
+    darkmode.classList.remove("toggleclass");
+    lightmode.classList.add("toggleclass");
+    beigemode.classList.remove("selectedthemehighlight");
+    greenmode.classList.remove("selectedthemehighlight");
+    orangemode.classList.remove("selectedthemehighlight");
+    greymode.classList.remove("selectedthemehighlight");
+    brownmode.classList.remove("selectedthemehighlight");
+    lavendermode.classList.add("selectedthemehighlight");
+  });
 
-<!--Add participants popup  -->
-    <div class="popup-overlay" id="pp_popupForm">
-      <div class="popup-box">
-        <h3>Add Guest</h3>
-        <div class="input-group">
-            <input type="text" id="guestname" placeholder=" " />
-            <label for="name">Name</label>
-         </div>
-         <div class="input-group">
-            <input type="text" id="flatNumber" placeholder=" "  />
-            <label for="flatNumber">Flat Number</label>
-         </div>
-          <div class="input-group">
-            <input type="number" id="noOfAdults" placeholder=" " value="0" />
-            <label for="noOfAdults">Number of Adults</label>
-          </div>
-          <div class="input-group">
-            <input type="number" placeholder=" " id="noOfKids" value="0"/>
-            <label for="noOfKids">Number of Kids > 5 yrs</label>
-          </div>
-          <div class="input-group">
-            <input type="number" placeholder=" " id="veg" value="0" />
-            <label for="veg">Number of Veg</label>
-          </div>
-          <div class="input-group">
-            <input type="number" placeholder=" " id="nv" value="0" />
-            <label for="nv">Number of Non-Veg</label>
-          </div>
-          <div class="input-group">
-            <input type="text" placeholder=" " id="tripname_PP" readonly/>
-            <label for="tripname_PP">Name of the Trip</label>
-          </div>
-          <div class="button-group">
-            <button onclick="submitForm()">Submit</button>
-            <button class="close-btn" onclick="closeForm()">Close</button>
-        </div>
-        </div>
-      </div>
+  beigemode.addEventListener("click", () => {
+    document.body.className = "";
+    document.body.classList.add("beige-theme");
+    localStorage.setItem("selectedTheme", document.body.classList.value);
+    darkmode.classList.remove("toggleclass");
+    lightmode.classList.add("toggleclass");
+    lavendermode.classList.remove("selectedthemehighlight");
+    greenmode.classList.remove("selectedthemehighlight");
+    orangemode.classList.remove("selectedthemehighlight");
+    greymode.classList.remove("selectedthemehighlight");
+    brownmode.classList.remove("selectedthemehighlight");
+    beigemode.classList.toggle("selectedthemehighlight");
+  });
 
-<script src="../js/index.js"></script>
-</body>
-</html>
+  greenmode.addEventListener("click", () => {
+    document.body.className = "";
+    document.body.classList.add("green-theme");
+    localStorage.setItem("selectedTheme", document.body.classList.value);
+    darkmode.classList.remove("toggleclass");
+    lightmode.classList.add("toggleclass");
+    beigemode.classList.remove("selectedthemehighlight");
+    lavendermode.classList.remove("selectedthemehighlight");
+    orangemode.classList.remove("selectedthemehighlight");
+    greymode.classList.remove("selectedthemehighlight");
+    brownmode.classList.remove("selectedthemehighlight");
+    greenmode.classList.add("selectedthemehighlight");
+  });
+
+  orangemode.addEventListener("click", () => {
+    document.body.className = "";
+    document.body.classList.add("orange-theme");
+    localStorage.setItem("selectedTheme", document.body.classList.value);
+    darkmode.classList.remove("toggleclass");
+    lightmode.classList.add("toggleclass");
+    beigemode.classList.remove("selectedthemehighlight");
+    lavendermode.classList.remove("selectedthemehighlight");
+    greenmode.classList.remove("selectedthemehighlight");
+    greymode.classList.remove("selectedthemehighlight");
+    brownmode.classList.remove("selectedthemehighlight");
+    orangemode.classList.add("selectedthemehighlight");
+  });
+
+  greymode.addEventListener("click", () => {
+    document.body.className = "";
+    document.body.classList.add("grey-theme");
+    localStorage.setItem("selectedTheme", document.body.classList.value);
+    darkmode.classList.remove("toggleclass");
+    lightmode.classList.add("toggleclass");
+    beigemode.classList.remove("selectedthemehighlight");
+    lavendermode.classList.remove("selectedthemehighlight");
+    greenmode.classList.remove("selectedthemehighlight");
+    orangemode.classList.remove("selectedthemehighlight");
+    brownmode.classList.remove("selectedthemehighlight");
+    greymode.classList.add("selectedthemehighlight");
+  });
+
+  brownmode.addEventListener("click", () => {
+    document.body.className = "";
+    document.body.classList.add("brown-theme");
+    localStorage.setItem("selectedTheme", document.body.classList.value);
+    darkmode.classList.remove("toggleclass");
+    lightmode.classList.add("toggleclass");
+    beigemode.classList.remove("selectedthemehighlight");
+    lavendermode.classList.remove("selectedthemehighlight");
+    greenmode.classList.remove("selectedthemehighlight");
+    orangemode.classList.remove("selectedthemehighlight");
+    greymode.classList.remove("selectedthemehighlight");
+    brownmode.classList.add("selectedthemehighlight");
+  });
+
+  document.querySelectorAll(".tab").forEach((tab) => {
+    tab.addEventListener("click", () => {
+      document
+        .querySelectorAll(".tab")
+        .forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+      console.log(tab.textContent.trim());
+      if (tab.textContent.trim() === "Trips") {
+        tripContainer.style.display = "grid";
+        addBtn.style.display = "none";
+        // tripDetails.style.display='none';
+        addtripBtn.style.display = "block";
+        activity.style.display = "none";
+        account.style.display = "none";
+        backBtn.style.display = "none";
+      }
+      if (tab.textContent.trim() === "Activity") {
+        tripContainer.style.display = "none";
+        addBtn.style.display = "none";
+        addtripBtn.style.display = "none";
+        account.style.display = "none";
+        // tripDetails.style.display='none';
+        activity.style.display = "block";
+        backBtn.style.display = "block";
+      }
+      if (tab.textContent.trim() === "Account") {
+        tripContainer.style.display = "none";
+        addBtn.style.display = "none";
+        addtripBtn.style.display = "none";
+        // tripDetails.style.display='none';
+        activity.style.display = "none";
+        account.style.display = "block";
+        backBtn.style.display = "block";
+      }
+    });
+  });
+
+  try {
+    const response = await fetch("/api/trips");
+    const trips = await response.json();
+    console.log("Tripid = ", trips);
+    const container = tripContainer;
+    container.innerHTML = "";
+
+    trips.forEach((trip) => {
+      const card = document.createElement("div");
+      card.className = "trip-card";
+      card.dataset.tripid = trip._id;
+      card.dataset.tripname = trip.tripname;
+      // if (trip.tripStatus === "Active") {
+      //   card.style.backgroundColor = "#90ee9075";
+      // }
+      if (trip.tripStatus === "Closed") {
+        card.style.backgroundColor = "#ffb6c14a";
+      }
+      const cardLeft = document.createElement("div");
+      cardLeft.className = "trip-card-detail";
+      cardLeft.innerHTML = `
+            <h3>${trip.tripname}</h3>
+            <h5>Date: ${trip.tripDate}</h5>
+            `;
+
+      const cardRight = document.createElement("div");
+      cardRight.className = "trip-card-arrow";
+      cardRight.innerHTML = `<i class="fa-solid fa-chevron-right"></i>`;
+
+      card.addEventListener("click", () => {
+        selectedTripId = card.dataset.tripid;
+        selectedTripName = card.dataset.tripname;
+        console.log("--->", card.dataset);
+
+        localStorage.setItem("selectedTripId", selectedTripId);
+        localStorage.setItem("selectedTripName", selectedTripName);
+        const url = `../html/tripdetails.html?tripId=${encodeURIComponent(
+          selectedTripId
+        )}&tripName=${encodeURIComponent(selectedTripName)}`;
+        window.location.href = url;
+      });
+
+      // Assemble card
+      card.appendChild(cardLeft);
+      card.appendChild(cardRight);
+      container.appendChild(card);
+    });
+  } catch (err) {
+    showNotification("Failed to load trips on app start");
+  }
+
+  backBtn.onclick = () => {
+    console.log("311");
+    window.location.hash = "#trip";
+    tripContainer.style.display = "grid";
+    addBtn.style.display = "none";
+    addtripBtn.style.display = "block";
+    activity.style.display = "none";
+    account.style.display = "none";
+    backBtn.style.display = "none";
+    // tripDetails.style.display='none';
+    tavNav.style.display = "flex";
+  };
+
+  addtripBtn.onclick = () => {
+    popupTrip.style.display = "flex";
+    popupTrip.style.zIndex = "1";
+  };
+
+  themeclick.addEventListener("click", function (event) {
+    const themesDiv = document.querySelector(".themes");
+
+    themesDiv.style.display = "block";
+    event.stopPropagation();
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!themesDiv.contains(event.target) && event.target !== mapIcon) {
+      themesDiv.style.display = "none";
+    }
+  });
+
+  window.closeTripForm = function () {
+    popupTrip.style.display = "none";
+  };
+
+  window.submitTripForm = async function () {
+    const tripname = document.getElementById("tripname").value;
+    let tripDate = document.getElementById("tripdate").value;
+    const tripStatus = "Active";
+    console.log({ tripname });
+    console.log({ tripDate });
+    tripDate = formatTripDate(tripDate);
+    console.log("new date", tripDate);
+    try {
+      const response = await fetch("/addtrip", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tripname, tripDate, tripStatus }),
+      });
+      const result = await response.json();
+      if (result.success) {
+        showNotification("Trip Created successfully!");
+        const response = await fetch("/api/trips");
+        const trips = await response.json();
+        console.log("Tripid = ", trips);
+        const container = tripContainer;
+        container.innerHTML = "";
+
+        trips.forEach((trip) => {
+          const card = document.createElement("div");
+          card.className = "trip-card";
+          card.dataset.tripid = trip._id;
+          card.dataset.tripname = trip.tripname;
+          // if (trip.tripStatus === "Active") {
+          //   card.style.backgroundColor = "#90ee9075";
+          // }
+          if (trip.tripStatus === "Closed") {
+            card.style.backgroundColor = "#ffb6c14a";
+          }
+          const cardLeft = document.createElement("div");
+          cardLeft.className = "trip-card-detail";
+          cardLeft.innerHTML = `
+                    <h3>${trip.tripname}</h3>
+                    <h5>Date: ${trip.tripDate}</h5>
+                    `;
+
+          const cardRight = document.createElement("div");
+          cardRight.className = "trip-card-arrow";
+          cardRight.innerHTML = `<i class="fa-solid fa-chevron-right"></i>`;
+
+          card.addEventListener("click", () => {
+            selectedTripId = card.dataset.tripid;
+            selectedTripName = card.dataset.tripname;
+            console.log("--->", card.dataset);
+
+            localStorage.setItem("selectedTripId", selectedTripId);
+            localStorage.setItem("selectedTripName", selectedTripName);
+            localStorage.setItem("selectedTheme", selectedTheme);
+            const url = `../html/tripdetails.html?tripId=${encodeURIComponent(
+              selectedTripId
+            )}&tripName=${encodeURIComponent(selectedTripName)}`;
+            window.location.href = url;
+          });
+
+          // Assemble card
+          card.appendChild(cardLeft);
+          card.appendChild(cardRight);
+          container.appendChild(card);
+        });
+      } else {
+        showNotification("Failed to create Trip");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+    }
+    closeTripForm();
+  };
+});
+
+function showNotification(message, duration = 3000) {
+  const notification = document.getElementById("notification");
+  notification.textContent = message;
+  notification.classList.add("show");
+
+  setTimeout(() => {
+    notification.classList.remove("show");
+  }, duration);
+}
+
+function formatTripDate(dateString) {
+  console.log("dateString =" + dateString);
+  if (dateString !== null && dateString !== "" && dateString !== undefined) {
+    console.log("1");
+    const date = new Date(dateString);
+    console.log("date" + date);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = date.toLocaleString("default", { month: "long" });
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  } else {
+    console.log("2");
+    const date = new Date();
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = date.toLocaleString("default", { month: "long" });
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  }
+}
