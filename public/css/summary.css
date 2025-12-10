@@ -6,7 +6,6 @@
   box-sizing: border-box;
   font-family: "Verdana", sans-serif;
 }
-
 :root {
   --text-primary: #1f2936;
   --bg-primary: #f9fafb;
@@ -15,9 +14,10 @@
   --bg-tab-font: #fff;
   --bg-inactivetab: #fff;
   --bg-button: #372f2f;
-  --bg-odd-color: #caf3c2;
-  --bg-even-color: #caf3c294;
-  --bg-badge-color: #cdcde3;
+  --bg-odd-color: #e9e9e9;
+  --bg-even-color: #c0c1c094;
+  --bg-badge-color: #f3f3f3;
+  --bg-selectedtab: #c1c3c1;
 }
 
 body.light-theme {
@@ -28,9 +28,10 @@ body.light-theme {
   --bg-tab-font: #fff;
   --bg-inactivetab: #fff;
   --bg-button: #372f2f;
-  --bg-odd-color: #caf3c2;
-  --bg-even-color: #caf3c294;
-  --bg-badge-color: #cdcde3;
+  --bg-odd-color: #e9e9e9;
+  --bg-even-color: #c0c1c094;
+  --bg-badge-color: #f3f3f3;
+  --bg-selectedtab: #c1c3c1;
 }
 
 body.dark-theme {
@@ -41,83 +42,10 @@ body.dark-theme {
   --bg-tab-font: #000;
   --bg-inactivetab: #000;
   --bg-button: #51515f;
-  --bg-odd-color: #e0e1df;
-  --bg-even-color: #f4fff2d1;
-  --bg-badge-color: #e0e0eb73;
-}
-
-body.lavender-theme {
-  --text-primary: #000;
-  --bg-primary: #d3d3ff;
-  --bg-secondary: #c0c0e8;
-  --bg-tabcolor: #c0c0e8;
-  --bg-tab-font: #000;
-  --bg-inactivetab: #84849f;
-  --bg-button: #51515f;
-  --bg-odd-color: #cbcbf1;
-  --bg-even-color: #b9b9d9b8;
-  --bg-badge-color: #cdcde3;
-}
-
-body.green-theme {
-  --text-primary: #000;
-  --bg-primary: #e3fede;
-  --bg-secondary: #c6fcbc;
-  --bg-tabcolor: #a2e496;
-  --bg-inactivetab: #474545;
-  --bg-tab-font: #000;
-  --bg-button: #7b9c74;
-  --bg-odd-color: #caf3c2;
-  --bg-even-color: #caf3c294;
-  --bg-badge-color: #c1ddbc;
-}
-
-body.beige-theme {
-  --text-primary: #f1f5f9;
-  --bg-primary: #f5f5dc;
-  --bg-secondary: #3d4859;
-  --bg-tabcolor: #a2e496;
-  --bg-tab-font: #000;
-  --bg-inactivetab: #fff;
-  --bg-odd-color: #caf3c2;
-  --bg-even-color: #caf3c294;
-  --bg-badge-color: #cdcde3;
-}
-
-body.orange-theme {
-  --text-primary: #f1f5f9;
-  --bg-primary: #ffc067;
-  --bg-secondary: #3d4859;
-  --bg-tabcolor: #a2e496;
-  --bg-tab-font: #000;
-  --bg-inactivetab: #fff;
-  --bg-odd-color: #caf3c2;
-  --bg-even-color: #caf3c294;
-  --bg-badge-color: #cdcde3;
-}
-
-body.grey-theme {
-  --text-primary: #f1f5f9;
-  --bg-primary: #dbdcda;
-  --bg-secondary: #3d4859;
-  --bg-tabcolor: #a2e496;
-  --bg-tab-font: #000;
-  --bg-inactivetab: #fff;
-  --bg-odd-color: #caf3c2;
-  --bg-even-color: #caf3c294;
-  --bg-badge-color: #cdcde3;
-}
-
-body.brown-theme {
-  --text-primary: #f1f5f9;
-  --bg-primary: #e7c6a2;
-  --bg-secondary: #3d4859;
-  --bg-tabcolor: #a2e496;
-  --bg-tab-font: #000;
-  --bg-inactivetab: #fff;
-  --bg-odd-color: #caf3c2;
-  --bg-even-color: #caf3c294;
-  --bg-badge-color: #cdcde3;
+  --bg-odd-color: #d7d7d7;
+  --bg-even-color: #b7b7b7;
+  --bg-badge-color: #ffffffa3;
+  --bg-selectedtab: #c1c3c1;
 }
 
 body {
@@ -388,6 +316,10 @@ button {
   background: #d9f3d4;
 }  */
 
+#exportBtn {
+  color: var(--text-primary);
+}
+
 .summarydetails {
   display: flex;
   justify-content: center;
@@ -500,6 +432,7 @@ button {
 
 .card-container > .cards {
   flex: 1 1 calc(50% - 15px); /* Each card takes half width minus gap */
+  color: var(--text-primary);
 }
 
 .cards {
