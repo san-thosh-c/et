@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const tripName = urlParams.get("tripName");
   const theme = localStorage.getItem("selectedTheme");
   const selectedCategory = localStorage.getItem("selectedCategory");
+
   let category =
     selectedCategory === "Local Transport"
       ? "Local_Transport"
@@ -115,7 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const card_end = document.createElement("div");
       card_end.className = "exp-amount";
-      card_end.innerHTML = "₹ " + op.amount;
+      card_end.innerHTML = "₹ " + op.amount.toLocaleString("en-IN");
 
       cardRight.appendChild(cardRight_top);
       cardRight.appendChild(cardRight_btm);
@@ -124,6 +125,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       card.appendChild(cardRight);
       card.appendChild(card_end);
       cat_view_container.appendChild(card);
+      console.log(card);
     });
   } catch (err) {}
 
@@ -148,7 +150,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         categoryTotals[exp.category] += exp.amount;
       });
 
-      // Convert to array format
       const output = Object.entries(categoryTotals).map(
         ([category, amount]) => ({
           category,
@@ -166,9 +167,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             .reduce((sum, exp) => sum + exp.amount, 0)
             .toLocaleString("en-IN");
       }, 1000);
-      //   let category_list = filterByCategory(category, expenses_res);
-      //   console.log("category_list = ", category_list);
-
       setTimeout(() => {
         const element = document.getElementById("categoryexpenses");
         element.style.visibility = "visible";
@@ -236,7 +234,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const cardRight_btm = document.createElement("p");
         cardRight_btm.className = "cat-amt";
-        cardRight_btm.innerHTML = `₹  <strong>${op.amount}</strong>`;
+        cardRight_btm.innerHTML = `₹  <strong>${op.amount.toLocaleString(
+          "en-IN"
+        )}</strong>`;
 
         cardRight.appendChild(cardRight_top);
         cardRight.appendChild(cardRight_btm);
