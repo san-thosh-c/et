@@ -39,20 +39,8 @@
         ></i>
       </div>
     </div>
-    <!-- Trip landing page -->
     <div class="trip_main_details" id="trip_main_details">
       <hr />
-      <!-- <div class="trip_pp_details">
-              <div class="trip_pp_left">
-                  <p id="trip_adult"></p>
-                  <p id="trip_veg"></p>
-              </div>
-              <div class="trip_pp_right">
-                  <p id="trip_kids"></p>
-                  <p id="trip_nv"></p>
-              </div>
-            </div> -->
-      <!-- <hr>  -->
       <div class="expense_calculation" id="expense_calculation">
         <div class="button-groups">
           <button
@@ -70,14 +58,10 @@
             Full Expense List
           </button>
         </div>
-        <!-- <br>
-              <hr> -->
         <div class="totalexpenses" id="totalexpenses">
           <p class="total">Total</p>
           <p id="fullamt" class="fullamt">₹ 0</p>
         </div>
-
-        <!-- <hr> -->
       </div>
       <p class="exp_count" id="exp_count"></p>
       <div class="expense_list" id="expense_list"></div>
@@ -95,12 +79,12 @@
         </button>
       </div>
     </div>
-    <!-- Settings -->
+
     <div class="trip_settings" id="trip_settings" hidden>
       <hr />
       <div class="trip_setting_header" id="trip_setting_header">
         <p id="trip_setting_tripname" class="trip_setting_tripname"></p>
-        <p id="numberofpp"></p>
+        <p id="numberofpp" class="numberofpp"></p>
       </div>
       <hr />
       <div class="groupmembers">
@@ -119,7 +103,7 @@
         <h6>Delete Group</h6>
       </div>
     </div>
-    <!-- Add expense page -->
+
     <div class="addexpense" id="addexpense" hidden>
       <div class="subheader" id="subheader_add_expense">
         <div class="left-buttons">
@@ -253,7 +237,6 @@
       </div>
     </div>
 
-    <!-- Edit Expense page  -->
     <div class="editexpense" id="editexpense" hidden>
       <div class="subheader" id="subheader_edit_expense">
         <div class="left-buttons">
@@ -267,10 +250,6 @@
         </div>
       </div>
       <hr />
-      <!-- <div class="editexp_tripname" id="editexp_tripname">
-        <p id="editexp_tripname_p"></p>
-      </div>
-      <hr> -->
       <div class="editexp_details" id="editexp_details">
         <div class="editexp_desc">
           <div class="label-row">
@@ -373,7 +352,7 @@
             <p>Paid on</p>
           </div>
           <div class="input-row">
-            <div class="rupee-wrapper">
+            <div class="rupee-wrapper" id="special">
               <i class="fa-solid fa-calendar"></i>
               <input type="date" placeholder="Date" id="edit_exp_date" />
             </div>
