@@ -262,7 +262,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       for (let t1 of stp3) {
         const t1_obj = stp4.filter((obj) => obj.guestId === t1.id);
         if (t1_obj.length > 0) {
-          ap_amt = t1_obj[0].categories.Advance_Payment;
+          let ap_amt =
+            t1_obj[0] &&
+            t1_obj[0].categories &&
+            t1_obj[0].categories.Advance_Payment
+              ? t1_obj[0].categories.Advance_Payment
+              : 0;
+
           let dataobj = {};
           dataobj.flatNumber = t1.flatNumber;
           dataobj.guestName = t1.guestName;
@@ -279,6 +285,25 @@ document.addEventListener("DOMContentLoaded", async () => {
             dataobj.totalpaid = t1.total_amount;
           }
 
+          final.push(dataobj);
+        } else {
+          console.log("t1==>", t1);
+          let dataobj = {};
+          dataobj.flatNumber = t1.flatNumber;
+          dataobj.guestName = t1.guestName;
+          dataobj.guestId = t1.id;
+          dataobj.headcount = t1.headcount;
+          dataobj.totalNveg = t1.totalNveg;
+          dataobj.totalVeg = t1.totalVeg;
+          dataobj.advance_amt = Number(0.0);
+          if (t1.isFinancier === true && t1.id === financierId) {
+            dataobj.spent = Number(stp6);
+            dataobj.totalpaid = ap_amt + stp6;
+          } else {
+            dataobj.spent = Math.abs(Number(0.0) - t1.total_amount);
+            dataobj.totalpaid = t1.total_amount;
+          }
+          console.log("dataobj==>", dataobj);
           final.push(dataobj);
         }
       }
