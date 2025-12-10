@@ -15,9 +15,10 @@
   --bg-tab-font: #fff;
   --bg-inactivetab: #fff;
   --bg-button: #372f2f;
-  --bg-odd-color: #caf3c2;
-  --bg-even-color: #caf3c294;
-  --bg-badge-color: #cdcde3;
+  --bg-odd-color: #e9e9e9;
+  --bg-even-color: #c0c1c094;
+  --bg-badge-color: #f3f3f3;
+  --bg-selectedtab: #c1c3c1;
 }
 
 body.light-theme {
@@ -27,10 +28,11 @@ body.light-theme {
   --bg-tabcolor: #000;
   --bg-tab-font: #fff;
   --bg-inactivetab: #fff;
-  --bg-button: #372f2f;
-  --bg-odd-color: #caf3c2;
-  --bg-even-color: #caf3c294;
-  --bg-badge-color: #cdcde3;
+  --bg-button: #4682b4;
+  --bg-odd-color: #e9e9e9;
+  --bg-even-color: #c0c1c094;
+  --bg-badge-color: #f3f3f3;
+  --bg-selectedtab: #c1c3c1;
 }
 
 body.dark-theme {
@@ -41,83 +43,10 @@ body.dark-theme {
   --bg-tab-font: #000;
   --bg-inactivetab: #000;
   --bg-button: #51515f;
-  --bg-odd-color: #e0e1df;
-  --bg-even-color: #f4fff2d1;
-  --bg-badge-color: #e0e0eb73;
-}
-
-body.lavender-theme {
-  --text-primary: #000;
-  --bg-primary: #d3d3ff;
-  --bg-secondary: #c0c0e8;
-  --bg-tabcolor: #c0c0e8;
-  --bg-tab-font: #000;
-  --bg-inactivetab: #84849f;
-  --bg-button: #51515f;
-  --bg-odd-color: #cbcbf1;
-  --bg-even-color: #b9b9d9b8;
-  --bg-badge-color: #cdcde3;
-}
-
-body.green-theme {
-  --text-primary: #000;
-  --bg-primary: #e3fede;
-  --bg-secondary: #c6fcbc;
-  --bg-tabcolor: #a2e496;
-  --bg-inactivetab: #474545;
-  --bg-tab-font: #000;
-  --bg-button: #7b9c74;
-  --bg-odd-color: #caf3c2;
-  --bg-even-color: #caf3c294;
-  --bg-badge-color: #c1ddbc;
-}
-
-body.beige-theme {
-  --text-primary: #f1f5f9;
-  --bg-primary: #f5f5dc;
-  --bg-secondary: #3d4859;
-  --bg-tabcolor: #a2e496;
-  --bg-tab-font: #000;
-  --bg-inactivetab: #fff;
-  --bg-odd-color: #caf3c2;
-  --bg-even-color: #caf3c294;
-  --bg-badge-color: #cdcde3;
-}
-
-body.orange-theme {
-  --text-primary: #f1f5f9;
-  --bg-primary: #ffc067;
-  --bg-secondary: #3d4859;
-  --bg-tabcolor: #a2e496;
-  --bg-tab-font: #000;
-  --bg-inactivetab: #fff;
-  --bg-odd-color: #caf3c2;
-  --bg-even-color: #caf3c294;
-  --bg-badge-color: #cdcde3;
-}
-
-body.grey-theme {
-  --text-primary: #f1f5f9;
-  --bg-primary: #dbdcda;
-  --bg-secondary: #3d4859;
-  --bg-tabcolor: #a2e496;
-  --bg-tab-font: #000;
-  --bg-inactivetab: #fff;
-  --bg-odd-color: #caf3c2;
-  --bg-even-color: #caf3c294;
-  --bg-badge-color: #cdcde3;
-}
-
-body.brown-theme {
-  --text-primary: #f1f5f9;
-  --bg-primary: #e7c6a2;
-  --bg-secondary: #3d4859;
-  --bg-tabcolor: #a2e496;
-  --bg-tab-font: #000;
-  --bg-inactivetab: #fff;
-  --bg-odd-color: #caf3c2;
-  --bg-even-color: #caf3c294;
-  --bg-badge-color: #cdcde3;
+  --bg-odd-color: #d7d7d7;
+  --bg-even-color: #b7b7b7;
+  --bg-badge-color: #ffffffa3;
+  --bg-selectedtab: #c1c3c1;
 }
 
 body {
@@ -336,6 +265,7 @@ button {
   padding: 0 20px;
   font-size: 14px;
   font-weight: 600;
+  color: var(--text-primary);
 }
 
 .trip_footer {
@@ -384,6 +314,11 @@ button {
   font-size: 26px;
   display: flex;
   justify-content: space-evenly;
+  color: var(--text-primary);
+}
+
+.trip_setting_header .numberofpp {
+  color: var(--text-primary);
 }
 
 .trip_setting_header i {
@@ -642,6 +577,7 @@ button {
 .addexpense .addexp_details .addexp_date .label-row p {
   margin: 0;
   font-size: 12px;
+  color: var(--text-primary);
 }
 
 .addexpense .addexp_details .addexp_desc .input-row,
@@ -723,6 +659,10 @@ button {
   margin: 20px 0;
 }
 
+#addexp_tripname_p {
+  color: var(--text-primary);
+}
+
 /*******Edit Expense **********/
 /* .editexpense .addexp_tripname{
     padding: 0 20px;
@@ -759,6 +699,11 @@ button {
 .editexpense .editexp_details .editexp_date .label-row p {
   margin: 0;
   font-size: 12px;
+  color: var(--text-primary);
+}
+
+.editexpense .editexp_details .editexp_date .input-row {
+  width: 100%;
 }
 
 .editexpense .editexp_details .editexp_desc .input-row,
@@ -775,6 +720,16 @@ button {
 
 .editexpense .editexp_details .editexp_amt .rupee-wrapper,
 .editexpense .editexp_details .edit_exp_date .rupee-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  padding: 0 10px;
+  height: 40px;
+  background-color: #f6f7fb;
+}
+
+#special {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1010,14 +965,6 @@ button {
   border-radius: 10px;
 }
 
-/* .expense_list .exp-card .exp-amount {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  right: 20px;
-  position: relative;
-} */
-
 .expense_list .exp-card .exp-details {
   display: flex;
   flex-direction: column;
@@ -1046,7 +993,7 @@ button {
   right: 0%;
   /* flex-wrap: wrap; */
   /* position: relative; */
-  font-size: 11px;
+  font-size: 13px;
   color: red;
 }
 
@@ -1057,6 +1004,7 @@ button {
 
 .expense_list .exp-card .exp-change i {
   margin-right: 10px;
+  opacity: 50%;
 }
 
 .expense_calculation {
@@ -1083,7 +1031,9 @@ button {
 }
 
 .expense_calculation .button-groups .show {
-  background-color: green;
+  background-color: var(--bg-selectedtab);
+  color: black;
+  font-weight: 600;
 }
 
 .button-groups .btn2 {
@@ -1093,7 +1043,9 @@ button {
 }
 
 .button-groups .btn:hover {
-  background-color: green;
+  background-color: var(--bg-selectedtab);
+  color: black;
+  font-weight: 600;
 }
 
 .totalexpenses {
