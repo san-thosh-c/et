@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   //document.getElementById("tripname").innerHTML = tripName + " Summary";
   const backBtn = document.getElementById("summary_back");
   const guestDetails = JSON.parse(flatDetails);
-  console.log(guestDetails);
+  console.log(theme);
 
   const showMoreLink = document.getElementById("showmore");
   const cardTable = document.getElementById("card-table");
@@ -42,10 +42,27 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const labels = expenses.map((exp) => exp.category);
     const dataValues = expenses.map((exp) => exp.amount);
-    const colors = ["#FF6384", "#36A2EB", "#FFCE56", "#8BC34A", "#FF9800"];
+    const colors = [
+      "#9D00FF",
+      "#FF6384",
+      "#36A2EB",
+      "#FFCE56",
+      "#8BC34A",
+      "#FF9800",
+      "#808080",
+      "#FFD700",
+      "#00FF00",
+      "#008080",
+    ];
     const ctx = document.getElementById("expenseChart").getContext("2d");
+    Chart.defaults.font.size = 18;
+    if (theme === "dark-theme") {
+      Chart.defaults.color = "#fff";
+    } else {
+      Chart.defaults.color = "#000";
+    }
     new Chart(ctx, {
-      type: "pie",
+      type: "doughnut",
       data: {
         labels: labels,
         datasets: [
@@ -150,18 +167,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const cardFirstDetails = document.createElement("div");
     cardFirstDetails.className = "cardInfo";
-
+    console.log("1", guestDetails);
     cardFirstDetails.innerHTML = `<h6>Advance Payments: ₹ ${guestDetails.advance_amt.toLocaleString(
       "en-IN"
     )}</h6>`;
 
     const cardSecondDetails = document.createElement("div");
     cardSecondDetails.className = "cardInfo";
-
+    console.log("2");
     cardSecondDetails.innerHTML = `
   <h6 style="display: flex; justify-content: space-between; align-items: center;">
     You Spend: ₹ ${guestDetails.spent.toLocaleString("en-IN")}
-    <i class="fa-solid fa-eye view-spend" style="cursor: pointer; color: #000; font-size: 18px; left: 80%; position: relative;"></i>
+    <i class="fa-solid fa-eye view-spend" style="cursor: pointer; color: #000; font-size: 18px; left: 60%; position: relative;"></i>
   </h6>
 `;
 
