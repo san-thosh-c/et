@@ -185,7 +185,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           const cardRight_top = document.createElement("p");
           cardRight_top.className = "exp-category";
-          cardRight_top.innerHTML = `${exp.category}`;
+          if (exp.category === "Advance_Payment") {
+            cardRight_top.innerHTML = "Advance";
+          } else if (exp.category === "Local_Transport") {
+            cardRight_top.innerHTML = "Local Transport";
+          } else {
+            cardRight_top.innerHTML = `${exp.category}`;
+          }
 
           const cardRight_btm = document.createElement("p");
           cardRight_btm.className = "exp-name";
@@ -197,7 +203,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           const card_end = document.createElement("div");
           card_end.className = "exp-amount";
-          card_end.innerHTML = "₹ " + exp.amount;
+          card_end.innerHTML = "₹ " + exp.amount.toLocaleString("en-IN");
 
           const card_end_1 = document.createElement("div");
           card_end_1.className = "exp-change";
@@ -1704,7 +1710,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const cardRight_btm = document.createElement("p");
       cardRight_btm.className = "cat-amt";
-      cardRight_btm.innerHTML = `₹  <strong>${op.amount}</strong>`;
+      cardRight_btm.innerHTML = `₹  <strong>${op.amount.toLocaleString(
+        "en-IN"
+      )}</strong>`;
 
       cardRight.appendChild(cardRight_top);
       cardRight.appendChild(cardRight_btm);
