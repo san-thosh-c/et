@@ -2,161 +2,52 @@ document.addEventListener("DOMContentLoaded", async () => {
   let selectedTripId,
     selectedTripName = null;
   let selectedTheme;
-  // localStorage.clear();
   localStorage.removeItem("selectedTripId");
   localStorage.removeItem("selectedTripName");
   selectedTheme = localStorage.getItem("selectedTheme");
-  console.log("selectedTheme=", selectedTheme);
-  if (
-    selectedTheme !== null &&
-    selectedTheme !== undefined &&
-    selectedTheme !== ""
-  ) {
-    document.body.className = "";
-    document.body.classList.add(selectedTheme);
-  }
-
   const addBtn = document.getElementById("addparticipants");
   const addtripBtn = document.getElementById("addtrip");
   const backBtn = document.getElementById("back");
   const tripContainer = document.getElementById("trip-container");
-  // const tripDetails = document.getElementById('tripdetails');
   const activity = document.getElementById("activity");
   const account = document.getElementById("account");
   const popupTrip = document.getElementById("trippopupForm");
-  // const pp_popup = document.getElementById("pp_popupForm");
   const tavNav = document.getElementById("tabNavigation");
-
-  const themeclick = document.getElementById("mapIcon");
-  const themesDiv = document.querySelector(".themes");
-  // const darkmode = document.getElementById("dark");
-  // const lightmode = document.getElementById("light");
-  const lavendermode = document.getElementById("lavender");
-  // const beigemode = document.getElementById("beige");
-  const greenmode = document.getElementById("green");
-  // const orangemode = document.getElementById("orange");
-  // const greymode = document.getElementById("grey");
-  // const brownmode = document.getElementById("brown");
-
   activity.style.display = "none";
-  account.style.display = "none";
   backBtn.style.display = "none";
-  addBtn.style.display = "none";
-  // tripDetails.style.display='none';
 
-  // darkmode.addEventListener("click", () => {
-  //   document.body.className = "";
-  //   document.body.classList.add("dark-theme");
-  //   localStorage.setItem("selectedTheme", document.body.classList.value);
-  //   darkmode.classList.add("toggleclass");
-  //   lightmode.classList.remove("toggleclass");
-  //   beigemode.classList.remove("selectedthemehighlight");
-  //   lavendermode.classList.remove("selectedthemehighlight");
-  //   greenmode.classList.remove("selectedthemehighlight");
-  //   orangemode.classList.remove("selectedthemehighlight");
-  //   greymode.classList.remove("selectedthemehighlight");
-  //   brownmode.classList.remove("selectedthemehighlight");
-  // });
+  const darkIcon = document.getElementById("dark");
+  const lightIcon = document.getElementById("light");
+  const body = document.body;
 
-  // lightmode.addEventListener("click", () => {
-  //   document.body.className = "";
-  //   document.body.classList.add("light-theme");
-  //   darkmode.classList.remove("toggleclass");
-  //   lightmode.classList.add("toggleclass");
+  const savedTheme = localStorage.getItem("selectedTheme");
+  if (savedTheme === "dark-theme") {
+    body.classList.add("dark-theme");
+    body.classList.remove("light-theme");
+    darkIcon.style.display = "none";
+    lightIcon.style.display = "inline-block";
+  } else {
+    body.classList.add("light-theme");
+    body.classList.remove("dark-theme");
+    darkIcon.style.display = "inline-block";
+    lightIcon.style.display = "none";
+  }
 
-  //   localStorage.setItem("selectedTheme", document.body.classList.value);
-  //   console.log("selectedTheme=>", document.body.classList.value);
-  //   beigemode.classList.remove("selectedthemehighlight");
-  //   lavendermode.classList.remove("selectedthemehighlight");
-  //   greenmode.classList.remove("selectedthemehighlight");
-  //   orangemode.classList.remove("selectedthemehighlight");
-  //   greymode.classList.remove("selectedthemehighlight");
-  //   brownmode.classList.remove("selectedthemehighlight");
-  // });
-
-  lavendermode.addEventListener("click", () => {
-    document.body.className = "";
-    document.body.classList.add("lavender-theme");
-    localStorage.setItem("selectedTheme", document.body.classList.value);
-    // darkmode.classList.remove("toggleclass");
-    // lightmode.classList.add("toggleclass");
-    // beigemode.classList.remove("selectedthemehighlight");
-    greenmode.classList.remove("selectedthemehighlight");
-    // orangemode.classList.remove("selectedthemehighlight");
-    // greymode.classList.remove("selectedthemehighlight");
-    // brownmode.classList.remove("selectedthemehighlight");
-    lavendermode.classList.add("selectedthemehighlight");
+  darkIcon.addEventListener("click", () => {
+    body.classList.add("dark-theme");
+    body.classList.remove("light-theme");
+    darkIcon.style.display = "none";
+    lightIcon.style.display = "inline-block";
+    localStorage.setItem("selectedTheme", "dark-theme");
   });
 
-  // beigemode.addEventListener("click", () => {
-  //   document.body.className = "";
-  //   document.body.classList.add("beige-theme");
-  //   localStorage.setItem("selectedTheme", document.body.classList.value);
-  //   darkmode.classList.remove("toggleclass");
-  //   lightmode.classList.add("toggleclass");
-  //   lavendermode.classList.remove("selectedthemehighlight");
-  //   greenmode.classList.remove("selectedthemehighlight");
-  //   orangemode.classList.remove("selectedthemehighlight");
-  //   greymode.classList.remove("selectedthemehighlight");
-  //   brownmode.classList.remove("selectedthemehighlight");
-  //   beigemode.classList.toggle("selectedthemehighlight");
-  // });
-
-  greenmode.addEventListener("click", () => {
-    document.body.className = "";
-    document.body.classList.add("green-theme");
-    localStorage.setItem("selectedTheme", document.body.classList.value);
-    // darkmode.classList.remove("toggleclass");
-    // lightmode.classList.add("toggleclass");
-    // beigemode.classList.remove("selectedthemehighlight");
-    lavendermode.classList.remove("selectedthemehighlight");
-    // orangemode.classList.remove("selectedthemehighlight");
-    // greymode.classList.remove("selectedthemehighlight");
-    // brownmode.classList.remove("selectedthemehighlight");
-    greenmode.classList.add("selectedthemehighlight");
+  lightIcon.addEventListener("click", () => {
+    body.classList.add("light-theme");
+    body.classList.remove("dark-theme");
+    darkIcon.style.display = "inline-block";
+    lightIcon.style.display = "none";
+    localStorage.setItem("selectedTheme", "light-theme");
   });
-
-  // orangemode.addEventListener("click", () => {
-  //   document.body.className = "";
-  //   document.body.classList.add("orange-theme");
-  //   localStorage.setItem("selectedTheme", document.body.classList.value);
-  //   darkmode.classList.remove("toggleclass");
-  //   lightmode.classList.add("toggleclass");
-  //   beigemode.classList.remove("selectedthemehighlight");
-  //   lavendermode.classList.remove("selectedthemehighlight");
-  //   greenmode.classList.remove("selectedthemehighlight");
-  //   greymode.classList.remove("selectedthemehighlight");
-  //   brownmode.classList.remove("selectedthemehighlight");
-  //   orangemode.classList.add("selectedthemehighlight");
-  // });
-
-  // greymode.addEventListener("click", () => {
-  //   document.body.className = "";
-  //   document.body.classList.add("grey-theme");
-  //   localStorage.setItem("selectedTheme", document.body.classList.value);
-  //   darkmode.classList.remove("toggleclass");
-  //   lightmode.classList.add("toggleclass");
-  //   beigemode.classList.remove("selectedthemehighlight");
-  //   lavendermode.classList.remove("selectedthemehighlight");
-  //   greenmode.classList.remove("selectedthemehighlight");
-  //   orangemode.classList.remove("selectedthemehighlight");
-  //   brownmode.classList.remove("selectedthemehighlight");
-  //   greymode.classList.add("selectedthemehighlight");
-  // });
-
-  // brownmode.addEventListener("click", () => {
-  //   document.body.className = "";
-  //   document.body.classList.add("brown-theme");
-  //   localStorage.setItem("selectedTheme", document.body.classList.value);
-  //   darkmode.classList.remove("toggleclass");
-  //   lightmode.classList.add("toggleclass");
-  //   beigemode.classList.remove("selectedthemehighlight");
-  //   lavendermode.classList.remove("selectedthemehighlight");
-  //   greenmode.classList.remove("selectedthemehighlight");
-  //   orangemode.classList.remove("selectedthemehighlight");
-  //   greymode.classList.remove("selectedthemehighlight");
-  //   brownmode.classList.add("selectedthemehighlight");
-  // });
 
   document.querySelectorAll(".tab").forEach((tab) => {
     tab.addEventListener("click", () => {
@@ -168,29 +59,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (tab.textContent.trim() === "Trips") {
         tripContainer.style.display = "grid";
         addBtn.style.display = "none";
-        // tripDetails.style.display='none';
         addtripBtn.style.display = "block";
         activity.style.display = "none";
-        account.style.display = "none";
         backBtn.style.display = "none";
       }
-      if (tab.textContent.trim() === "Activity") {
+      if (tab.textContent.trim() === "Master List") {
         tripContainer.style.display = "none";
-        addBtn.style.display = "none";
         addtripBtn.style.display = "none";
-        account.style.display = "none";
-        // tripDetails.style.display='none';
         activity.style.display = "block";
         backBtn.style.display = "block";
-      }
-      if (tab.textContent.trim() === "Account") {
-        tripContainer.style.display = "none";
-        addBtn.style.display = "none";
-        addtripBtn.style.display = "none";
-        // tripDetails.style.display='none';
-        activity.style.display = "none";
-        account.style.display = "block";
-        backBtn.style.display = "block";
+        tab.classList.add("active");
+        // const url = `../html/masterlist.html?`;
+        // window.location.href = url;
       }
     });
   });
@@ -263,19 +143,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     popupTrip.style.display = "flex";
     popupTrip.style.zIndex = "1";
   };
-
-  themeclick.addEventListener("click", function (event) {
-    const themesDiv = document.querySelector(".themes");
-
-    themesDiv.style.display = "block";
-    event.stopPropagation();
-  });
-
-  document.addEventListener("click", function (event) {
-    if (!themesDiv.contains(event.target) && event.target !== mapIcon) {
-      themesDiv.style.display = "none";
-    }
-  });
 
   window.closeTripForm = function () {
     popupTrip.style.display = "none";
