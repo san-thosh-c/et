@@ -21,11 +21,8 @@
   <body>
     <div class="header">
       <h3>Trips</h3>
-      <i
-        class="fa-solid fa-palette mapIcon"
-        id="mapIcon"
-        title="Change Theme"
-      ></i>
+      <i class="fa-regular fa-moon" id="dark" aria-label="Enable dark mode" role="button" tabindex="0"></i>
+      <span class="material-symbols-outlined toggleclass" id="light" aria-label="Enable light mode" role="button" tabindex="0">Sunny</span>
     </div>
     <div class="subheader">
       <div class="left-buttons">
@@ -38,12 +35,6 @@
       </div>
       <div class="right-buttons">
         <i class="fa-solid fa-plus" id="addtrip" title="Add New Trip"></i>
-        <i
-          class="fa-solid fa-user-plus"
-          id="addparticipants"
-          hidden
-          title="Add Participants"
-        ></i>
       </div>
     </div>
     <div id="notification" class="notification"></div>
@@ -52,23 +43,19 @@
         <i class="fa-solid fa-suitcase-rolling"></i>
         <span>Trips</span>
       </a>
-      <a href="#activity" class="tab">
-        <i class="fa-solid fa-chart-line"></i>
-        <span>Activity</span>
-      </a>
-      <a href="#account" class="tab">
+      <!-- <a href="#activity" class="tab">
+          <i class="fa-solid fa-user"></i>
+          <span>Master List</span>
+        </a> -->
+      <!-- <a href="#account" class="tab">
         <i class="fa-solid fa-user"></i>
         <span>Account</span>
-      </a>
+      </a> -->
     </div>
 
     <div class="trip-container" id="trip-container"></div>
 
     <div id="activity" class="activity">
-      <p>This page is under construction</p>
-    </div>
-
-    <div id="account" class="account">
       <p>This page is under construction</p>
     </div>
 
@@ -84,24 +71,6 @@
         </div>
       </div>
     </div>
-
-    <div class="themes">
-      <!-- <div class="darktheme">
-        <i class="fa-regular fa-moon" id="dark"></i>
-        <span class="material-symbols-outlined toggleclass" id="light"
-          >Sunny</span
-        >
-      </div> -->
-      <!-- <hr /> -->
-      <p>Change Themes</p>
-      <div class="coloroptions">
-        <!-- <div class="one themediv" id="beige" title="Beige"></div> -->
-        <div class="two themediv" id="lavender" title="Lavender"></div>
-        <div class="three themediv" id="green" title="Green"></div>
-        <!-- <div class="four themediv" id="orange" title="Orange"></div>
-        <div class="five themediv" id="grey" title="Grey"></div>
-        <div class="six themediv" id="brown" title="Brown"></div> -->
-      </div>
     </div>
 
     <script src="../js/index.js"></script>
